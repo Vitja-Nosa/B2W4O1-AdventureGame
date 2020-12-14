@@ -1,0 +1,32 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+body {
+	background-color: #404040;
+}
+#game-container {
+	width: 1300px;
+	height: 680px;
+	border: 10px solid black;
+	margin: 10px auto;
+	background-color: white;
+	position: relative;
+}
+#title {
+	position: absolute;
+	font-size: 15px;
+	padding: 10px;
+	background-color: #f7dd65;
+	border: red dashed 8px;
+}
+#game-buttons {
+	position: absolute;
+	border: black solid 2px;
+	bottom: 0;
+	left: 40%;
+
+}
+button {
+	padding: 10px;
+}
