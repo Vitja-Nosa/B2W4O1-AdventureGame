@@ -58,6 +58,7 @@ function stage2() {
 	}
 	
 	button2.onclick = function(){
+<<<<<<< Updated upstream
 		description.innerHTML = listStage2["descriptionSearch"]
 
 		button1.onclick = function(){
@@ -80,6 +81,9 @@ function stage2() {
 		button3.onclick = function(){
 			stage1();
 		}
+=======
+		description.innerHTML = listStage2["descriptionSearch"]	
+>>>>>>> Stashed changes
 	}
 	
 	button3.onclick = function(){
