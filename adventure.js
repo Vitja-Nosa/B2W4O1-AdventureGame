@@ -24,7 +24,12 @@ var stagesInfo = {
 		"stageImage" : "url(images/stage2Image.jpg)",
 		"stageImageTorch" : "url(images/stage2Image2.jpg)",
 		"torchImage" : "images/torch.png",
-		"torch" : true
+		"torch" : false
+	},
+	"stage3" : listStage3 = {
+		"title" : "De Donkere Kamer",
+		"description" : "Je opent de rechter deur en komt terecht in een kamer waar het donker is, zo donker dat je bijna niks kan zien. <br> Wat doe je? <br> <br> Keuze 1: Ga terug naar de eerste kamer <br> Keuze 2: Loop verder de donkere kamer in",
+		"stageImageDark" : "url(images/darkRoom.jpg)"
 	}
 
 }
@@ -38,54 +43,117 @@ function stage1() {
 		description.innerHTML = listStage1["descriptionAfterFirstRun"];
 	}
 	button3.style.display = "none";
-	inventoryItem.style.display = "none";
+	if (listStage2["torch"] == false) {
+		inventoryItem.src = "images/Empty.png";
+	}
+	else {
+		inventoryItem.src = listStage2["torchImage"];
+	}
+	inventoryItem.style.display = "inline";
 	container.style.backgroundImage = listStage1["stageImage"];
 	button1.onclick = function(){
 		stage2();
 		listStage1["firstRun"] = false;
 	}
+	button2.onclick = function(){
+		stage3();
+	}
 }
 
 function stage2() {
 	title.innerHTML = listStage2["title"];
-	description.innerHTML = listStage2["description"];
-	inventoryItem.style.display = "none";
-	button3.style.display = "inline-block";
-	container.style.backgroundImage = listStage2["stageImage"];	
+	if (listStage2["torch"] == false) {
+		description.innerHTML = listStage2["description"];
+		button3.style.display = "inline-block";
+	}
+	else {
+		description.innerHTML = listStage2["descriptionAfterTorch"];
+	}
+
+	if (listStage2["torch"] == false) {
+		container.style.backgroundImage = listStage2["stageImage"];	
+	}
+	else {
+		container.style.backgroundImage = listStage2["stageImageTorch"];	
+	}
+	
 	
 	button1.onclick = function(){
 		gameOver();
 	}
-	
-	button2.onclick = function(){
-		description.innerHTML = listStage2["descriptionSearch"]
-
-		button1.onclick = function(){
-			gameOver();
-		}
-	
+	if (listStage2["torch"] == false) {
 		button2.onclick = function(){
-			container.style.backgroundImage = listStage2["stageImageTorch"];
-			button3.style.display = "none";
-			
+			description.innerHTML = listStage2["descriptionSearch"]
+
+			button1.onclick = function(){
+				gameOver();
+			}
+		
 			button2.onclick = function(){
+				container.style.backgroundImage = listStage2["stageImageTorch"];
+				button3.style.display = "none";
+				listStage2["torch"] = true;
+				
+				button2.onclick = function(){
+					stage1();
+				}
+				
+				description.innerHTML = listStage2["descriptionAfterTorch"];
+				inventoryItem.style.display = "block"
+				inventoryItem.src = listStage2["torchImage"]; 
+			}
+		
+			button3.onclick = function(){
 				stage1();
 			}
-			
-			description.innerHTML = listStage2["descriptionAfterTorch"];
-			inventoryItem.style.display = "block"
-			inventoryItem.src = listStage2["torchImage"]; 
 		}
-	
-		button3.onclick = function(){
+	}
+	else {
+		button2.onclick = function(){
 			stage1();
 		}
 	}
-	
+
 	button3.onclick = function(){
 		stage1();
 	}
 }
+function stage3() {
+	button1.onclick = function(){
+		stage1();
+		inventoryItem.removeAttribute("style");
+		inventoryItem.onclick = "";
+	};
+	button2.onclick = function(){
+		gameOver();
+		inventoryItem.removeAttribute("style");
+		inventoryItem.onclick = "";
+	}
+	container.style.backgroundImage = listStage3["stageImageDark"];
+	title.innerHTML = listStage3["title"];
+	description.innerHTML = listStage3["description"];
+	button3.style.display = "none"
+
+	if (listStage2["torch"] == false) {
+		inventoryItem.src = "images/Empty.png";
+	}
+	else {
+		inventoryItem.src = listStage2["torchImage"];
+		inventoryItem.setAttribute("style", "cursor: pointer;");
+		inventoryItem.onclick = function(){
+			inventoryItem.src = "images/Empty.png";
+			inventoryItem.removeAttribute("style");
+			inventoryItem.onclick = "";
+			stage4();
+		}
+	}
+
+	
+}
+function stage4() {
+	alert("LET THE BE LIGHT");
+}
+
 function gameOver() {
 	alert("Game Over");
 }
