@@ -62,22 +62,7 @@ function stage1() {
 
 function stage2() {
 	title.innerHTML = listStage2["title"];
-	if (listStage2["torch"] == false) {
-		description.innerHTML = listStage2["description"];
-		button3.style.display = "inline-block";
-	}
-	else {
-		description.innerHTML = listStage2["descriptionAfterTorch"];
-	}
-
-	if (listStage2["torch"] == false) {
-		container.style.backgroundImage = listStage2["stageImage"];	
-	}
-	else {
-		container.style.backgroundImage = listStage2["stageImageTorch"];	
-	}
-	
-	
+		
 	button1.onclick = function(){
 		gameOver();
 	}
@@ -107,11 +92,16 @@ function stage2() {
 				stage1();
 			}
 		}
+		description.innerHTML = listStage2["description"];
+		button3.style.display = "inline-block";
+		container.style.backgroundImage = listStage2["stageImage"];
 	}
 	else {
 		button2.onclick = function(){
 			stage1();
 		}
+		description.innerHTML = listStage2["descriptionAfterTorch"];
+		container.style.backgroundImage = listStage2["stageImageTorch"];	
 	}
 
 	button3.onclick = function(){
