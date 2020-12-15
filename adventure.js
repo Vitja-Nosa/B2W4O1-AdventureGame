@@ -36,14 +36,18 @@ var stagesInfo = {
 
 function stage1() {
 	title.innerHTML = listStage1["title"];
-	button3.style.display = "none";
-	if (listStage2["torch"] == false) {
-		inventoryItem.src = "images/Empty.png";
+	if (listStage1["firstRun"] == true) {
 		description.innerHTML = listStage1["description"];
 	}
 	else {
-		inventoryItem.src = listStage2["torchImage"];
 		description.innerHTML = listStage1["descriptionAfterFirstRun"];
+	}
+	button3.style.display = "none";
+	if (listStage2["torch"] == false) {
+		inventoryItem.src = "images/Empty.png";
+	}
+	else {
+		inventoryItem.src = listStage2["torchImage"];
 	}
 	inventoryItem.style.display = "inline";
 	container.style.backgroundImage = listStage1["stageImage"];
@@ -137,7 +141,7 @@ function stage3() {
 	
 }
 function stage4() {
-	alert("LIGHT");
+	alert("LET THE BE LIGHT");
 }
 
 function gameOver() {
